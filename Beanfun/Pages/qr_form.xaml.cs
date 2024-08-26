@@ -56,6 +56,16 @@ namespace Beanfun
             App.MainWnd.loginMethodChanged();
         }
 
+        private void UrlTextBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (UrlTextBox.Text == "" ) return;
+            try
+            {
+                Clipboard.SetText(UrlTextBox.Text);
+            }
+            catch { }
+        }
+
         private void btn_get_qr_url(object sender, RoutedEventArgs e)
         {
             App.LoginMethod = (int)LoginMethod.Regular;
