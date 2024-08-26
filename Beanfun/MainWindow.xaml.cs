@@ -21,7 +21,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Utility.ModifyRegistry;
-
+using ZXing;
 
 
 namespace Beanfun
@@ -1913,6 +1913,47 @@ namespace Beanfun
         {
             qrWorker.RunWorkerAsync(loginPage == null || loginPage.qr == null ? false : true);
         }
+
+        public string  decodeQRCode()
+        {
+            BitmapImage qrCodeImage = this.bfClient.getQRCodeImage(qrcodeClass); // 假设你有一个获取 QR 码图像的方法
+            if (qrCodeImage == null)
+            {
+                return "No QR Code image found.";
+            }
+
+            BarcodeReader reader = new BarcodeReader();
+            var result = reader.Decode(ToBitmap(qrCodeImage));
+
+            return result?.Text ?? "Failed to decode QR Code.";
+
+        }
+        private System.Drawing.Bitmap ToBitmap(BitmapImage bitmapImage)
+        {
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
+                enc.Save(outStream);
+                return new System.Drawing.Bitmap(outStream);
+            }
+        }
+
+        /* public string transfrom_qrcode_toUrl(BitmapImage bitmapImage)
+        {
+            Bitmap bitmap;
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                BitmapEncoder enc = new BmpBitmapEncoder();
+                enc.Frames.Add(BitmapFrame.Create(bitmapImage));
+                enc.Save(outStream);
+                bitmap = new Bitmap(outStream);
+            }
+
+            BarcodeReader reader = new BarcodeReader();
+            var result = reader.Decode(bitmap);
+            return result?.Text;
+        }*/
 
         public bool updateQRCodeImage()
         {

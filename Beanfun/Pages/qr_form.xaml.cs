@@ -34,6 +34,13 @@ namespace Beanfun
             Process.Start("https://tw.beanfun.com/bfevent/bfApp/Page20160930/PC/index.html");
         }
 
+        private void btn_get_qr_url_Click(object sender, RoutedEventArgs e)
+        {
+            string url = App.MainWnd.decodeQRCode();
+            UrlTextBox.Text = url;
+
+        }
+
         private void TextBlock_MouseLeave(object sender, MouseEventArgs e)
         {
             if (qr_Tip.Visibility == Visibility.Visible)
@@ -44,6 +51,12 @@ namespace Beanfun
         }
 
         private void btn_back_Click(object sender, RoutedEventArgs e)
+        {
+            App.LoginMethod = (int)LoginMethod.Regular;
+            App.MainWnd.loginMethodChanged();
+        }
+
+        private void btn_get_qr_url(object sender, RoutedEventArgs e)
         {
             App.LoginMethod = (int)LoginMethod.Regular;
             App.MainWnd.loginMethodChanged();

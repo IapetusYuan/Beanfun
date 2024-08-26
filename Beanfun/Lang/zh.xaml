@@ -108,6 +108,7 @@
     <system:String x:Key="RefreshQRCode">重新加載</system:String>
     <system:String x:Key="RunLastGame">同時啟動上回玩的遊戲</system:String>
     <system:String x:Key="BackRegularLogin">返回一般登入</system:String>
+    <system:String x:Key="DecodeQRCode">轉換QRcode</system:String>
     <system:String x:Key="UpdateChannel">更新通道</system:String>
     <system:String x:Key="Stable">穩定版</system:String>
     <system:String x:Key="Development">測試版</system:String>
